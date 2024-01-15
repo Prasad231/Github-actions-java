@@ -35,3 +35,12 @@ jobs:
            # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=prasad231_project1
+      - name: Build & push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: prasad231/java-maven
+          tags: v1.2
+          registry: docker.io
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
